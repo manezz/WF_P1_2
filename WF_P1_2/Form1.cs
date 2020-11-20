@@ -12,10 +12,12 @@ namespace WF_P1_2
 {
     public partial class Form1 : Form
     {
+        public string message;
+
         public class Kontakt
         {
             public string Fornavn { get; set; }
-            public string Efternavn { get; set; }
+            public String Efternavn { get; set; }
             public string TellefonNummer { get; set; }
         }
 
@@ -68,7 +70,11 @@ namespace WF_P1_2
 
         private void Knap_VisListe_Click(object sender, EventArgs e)
         {
-            
+            foreach (Kontakt k in kontakter)
+            {
+                message += k.Fornavn + k.Efternavn + k.TellefonNummer;
+            }
+            MessageBox.Show(message);
         }
 
         private void Knap_Tilfoj_Click(object sender, EventArgs e)
