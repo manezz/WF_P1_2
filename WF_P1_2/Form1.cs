@@ -13,11 +13,12 @@ namespace WF_P1_2
     public partial class Form1 : Form
     {
         public string message;
-        public int Count { get; }
+        public int kontaktN = 0;
+        public int rm;
         public class Kontakt
         {
             public string Fornavn { get; set; }
-            public String Efternavn { get; set; }
+            public string Efternavn { get; set; }
             public string TellefonNummer { get; set; }
         }
 
@@ -71,13 +72,17 @@ namespace WF_P1_2
 
         private void Knap_VisListe_Click(object sender, EventArgs e)
         {
+            message = "";
             foreach (Kontakt k in kontakter)
             {
-                message += $"Fornavn: {k.Fornavn}{Environment.NewLine}" +
+                kontaktN++;
+                message += $"Kontakt Nummer: {kontaktN}{Environment.NewLine}" +
+                    $"Fornavn: {k.Fornavn}{Environment.NewLine}" +
                     $"Efternavn: {k.Efternavn}{Environment.NewLine}" +
                     $"Tellefonnummer: {k.TellefonNummer}{Environment.NewLine}" +
                     $"{Environment.NewLine}";
             }
+            kontaktN = 0;
             MessageBox.Show(message);
         }
 
@@ -92,15 +97,27 @@ namespace WF_P1_2
 
         private void Knap_Fjern_Click(object sender, EventArgs e)
         {
-            int u = ;
             foreach (Kontakt k in kontakter)
             {
                 if ((TekstBoks_Fornavn.Text).ToString() == k.Fornavn
                     && (TekstBoks_Efternavn.Text).ToString() == k.Efternavn
                     && (TekstBoks_TfN.Text).ToString() == k.TellefonNummer)
                 {
-                    kontakter.RemoveAt(u);
+                    rm = kontaktN;
                 }
+                else
+                {
+                    kontaktN++;
+                }
+            }
+            kontaktN = 0;
+            try
+            {
+                kontakter.RemoveAt(rm);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Denne kontakt eksisterer ikke");
             }
         }
 
